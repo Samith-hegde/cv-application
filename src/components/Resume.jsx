@@ -22,7 +22,7 @@ function Resume({ data }) {
                 <div key={index}>
                     <p> Company: {exp.company} </p>
                     <p> Position: {exp.position} </p>
-                    <p> Main Tasks: {exp.mainTasks} </p>
+                    <p> Responsibilities: {exp.responsibilities} </p>
                     <p> Start Date: {exp.startDate} </p>
                     <p> End Date: {exp.endDate} </p>
                 </div>
