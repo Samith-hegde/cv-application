@@ -18,7 +18,6 @@ function Education({ onUpdate }) {
         onUpdate(newEducation);
     }
 
-
     return (
         <div className="Education">
             <h2> Education </h2>

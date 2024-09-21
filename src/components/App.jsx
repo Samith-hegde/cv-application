@@ -3,7 +3,8 @@ import { useState } from 'react';
 //import './App.css'
 import GeneralInfo from './GeneralInfo';
 import Education from './Education';
-//import Experience from './Experience';
+import Experience from './Experience';
+import SubmitButton from './SubmitButton';
 //import Resume from './Resume';  
 
 function App() {
@@ -30,11 +31,20 @@ function App() {
     }));
   }
 
+  const updateExperience = (data) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      experience: data,
+    }))
+  }
+
   return (
     <>
       <div className='Form'>
         <GeneralInfo onUpdate={updateGeneralInfo}/>
         <Education onUpdate={updateEducation}/>
+        <Experience onUpdate={updateExperience}/>
+        <SubmitButton data={resumeData}/>
       </div>    
 
       <div className='Resume'>
