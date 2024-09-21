@@ -5,7 +5,7 @@ import GeneralInfo from './GeneralInfo';
 import Education from './Education';
 import Experience from './Experience';
 import SubmitButton from './SubmitButton';
-//import Resume from './Resume';  
+import Resume from './Resume';  
 
 function App() {
   const [resumeData, setResumeData] = useState({
@@ -48,7 +48,7 @@ function App() {
       </div>    
 
       <div className='Resume'>
-        
+        <Resume data={resumeData}/>
       </div>
 
     </>

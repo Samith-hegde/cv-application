@@ -14,7 +14,7 @@ function Experience({ onUpdate }) {
             ...newExperience[index],
             [name]: value,
         };
-        setEducation(newExperience);
+        setExperience(newExperience);
         onUpdate(newExperience);
     }
 
