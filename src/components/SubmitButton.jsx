@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 
 function SubmitButton({ onUpdate }) {
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onUpdate();
+    }
+
     return (
         <div>
-            <button onClick={onUpdate}> Submit </button>
+            <button onClick={handleSubmit}> Submit </button>
         </div>
     )
 }

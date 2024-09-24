@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function GeneralInfo({ onUpdate }) {
+function GeneralInfo({ onUpdate, data, onEdit }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -18,6 +18,18 @@ function GeneralInfo({ onUpdate }) {
     const handlePhoneChange = (e) => {
         setPhone(e.target.value);
         onUpdate({ phone: e.target.value });
+    }
+
+    if (data.isEditing[0] === 0) {
+        return (
+            <div className="GeneralInfo">
+                <h2> General Information </h2>
+                <p> Name: {data.generalInfo.name} </p>
+                <p> Email: {data.generalInfo.email} </p>
+                <p> Phone: {data.generalInfo.phone} </p>
+                <button onClick={() => onEdit(0)}> Edit </button>
+            </div>
+        )
     }
 
     return (

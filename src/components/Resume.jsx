@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
 function Resume({ data }) {
-    
-    if (!data.isSubmitted) {
-        return <div className="Resume">  </div>;
-    }
 
     return (
         <div className="Resume">

@@ -13,6 +13,13 @@ function App() {
     education: [],
     experience: [],
     isSubmitted: false,
+    isEditing: [1, 1, 1],
+  });
+
+  const [submittedData, setSubmittedData] = useState({
+    generalInfo: [],
+    education: [],
+    experience: [],
   });
 
   const updateGeneralInfo = (data) => {
@@ -43,20 +50,40 @@ function App() {
     setResumeData((prevData) => ({
       ...prevData,
       isSubmitted: true,
+      isEditing: [0, 0, 0],
+    }));
+    setSubmittedData((prevData) => ({
+      ...prevData,
+      generalInfo: resumeData.generalInfo,
+      education: resumeData.education,
+      experience: resumeData.experience,
+    }));
+  }
+
+  const handleEdit = (index) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      isEditing: 
+        prevData.isEditing.map((value, i) => {
+          if (i === index) {
+            return 1;
+          }
+          return value;
+        }),
     }));
   }
 
   return (
     <>
       <div className='Form'>
-        <GeneralInfo onUpdate={updateGeneralInfo}/>
-        <Education onUpdate={updateEducation}/>
-        <Experience onUpdate={updateExperience}/>
-        <SubmitButton onUpdate={handleSubmit}/>
+        <GeneralInfo onUpdate={updateGeneralInfo} data={resumeData} onEdit={handleEdit}/>
+        <Education onUpdate={updateEducation} data={resumeData}/>
+        <Experience onUpdate={updateExperience} data={resumeData}/>
+        <SubmitButton onUpdate={handleSubmit} data={resumeData}/>
       </div>    
 
       <div className='Resume'>
-        <Resume data={resumeData}/>
+        <Resume data={submittedData}/>
       </div>
 
     </>
