@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
 
 function GeneralInfo({ onUpdate, data, onEdit }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [generalInfo, setGeneralInfo] = useState({
+        name: '',
+        email: '',
+        phone: '',
+    });
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-        onUpdate({ name: e.target.value });
-    }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-        onUpdate({ email: e.target.value });
-    }
-
-    const handlePhoneChange = (e) => {
-        setPhone(e.target.value);
-        onUpdate({ phone: e.target.value });
+    const handleFieldChange = (e) => {
+        const { name, value } = e.target;
+        setGeneralInfo((prevGeneralInfo) => ({
+            ...prevGeneralInfo,
+            [name]: value,
+        }));
+        onUpdate(generalInfo);
     }
 
     if (data.isEditing[0] === 0) {
         return (
-            <div className="GeneralInfo">
+            <div className="GeneralInfo-display">
                 <h2> General Information </h2>
                 <p> Name: {data.generalInfo.name} </p>
                 <p> Email: {data.generalInfo.email} </p>
@@ -33,20 +29,20 @@ function GeneralInfo({ onUpdate, data, onEdit }) {
     }
 
     return (
-        <div className="GeneralInfo">
+        <div className="GeneralInfoForm">
             <h2> General Information </h2>
-            <form>
+            <form className="GeneralInfoActualForm">
                 <label>
                     Name:
-                    <input type="text" value={name} onChange={handleNameChange} required/>
+                    <input type="text" name="name" value={generalInfo.name} onChange={handleFieldChange} required/>
                 </label>
                 <label>
                     Email:
-                    <input type="email" value={email} onChange={handleEmailChange} required/>
+                    <input type="email" name="email" value={generalInfo.email} onChange={handleFieldChange} required/>
                 </label>
                 <label>
                     Phone:
-                    <input type="text" value={phone} onChange={handlePhoneChange} required/>
+                    <input type="text" name="phone" value={generalInfo.phone} onChange={handleFieldChange} required/>
                 </label>
             </form>
         </div>

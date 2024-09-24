@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Experience({ onUpdate }) {
+function Experience({ onUpdate, data, onEdit }) {
     const [experience, setExperience] = useState([]);
 
     const handleAddExperience = () => {
@@ -18,12 +18,30 @@ function Experience({ onUpdate }) {
         onUpdate(newExperience);
     }
 
+    if (data.isEditing[2] === 0) {
+        return (
+            <div className="ExperienceDisplay">
+                <h2> Experience </h2>
+                {data.experience.map((exp, index) => (
+                    <div key={index}>
+                        <p> Company: {exp.company} </p>
+                        <p> Position: {exp.position} </p>
+                        <p> Responsibilities: {exp.responsibilities} </p>
+                        <p> Start Date: {exp.startDate} </p>
+                        <p> End Date: {exp.endDate} </p>
+                    </div>
+                ))}
+                <button onClick={() => onEdit(2)}> Edit </button>
+            </div>
+        )
+    }
+
     return (
-        <div className="Experience">
+        <div className="ExperienceForm">
             <h2> Experience </h2>
 
             {experience.map((exp, index) => (
-                <div key={index}>
+                <div key={index} className="ExperienceActualForm">
                     <label>
                         Company:
                         <input type="text" name="company" value={exp.company} onChange={(e) => handleFieldChange(e, index)} required/>

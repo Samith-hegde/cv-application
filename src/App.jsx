@@ -74,19 +74,19 @@ function App() {
   }
 
   return (
-    <>
+    <div className="container">
       <div className='Form'>
         <GeneralInfo onUpdate={updateGeneralInfo} data={resumeData} onEdit={handleEdit}/>
-        <Education onUpdate={updateEducation} data={resumeData}/>
-        <Experience onUpdate={updateExperience} data={resumeData}/>
-        <SubmitButton onUpdate={handleSubmit} data={resumeData}/>
+        <Education onUpdate={updateEducation} data={resumeData} onEdit={handleEdit}/>
+        <Experience onUpdate={updateExperience} data={resumeData} onEdit={handleEdit}/>
+        <SubmitButton onUpdate={handleSubmit} data={resumeData} onEdit={handleEdit}/>
       </div>    
 
       <div className='Resume'>
         <Resume data={submittedData}/>
       </div>
 
-    </>
+    </div>
   )
 }
 

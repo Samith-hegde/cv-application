@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Education({ onUpdate }) {
+function Education({ onUpdate, data, onEdit }) {
     const [education, setEducation] = useState([]);
 
     const handleAddEducation = () => {
@@ -18,12 +18,29 @@ function Education({ onUpdate }) {
         onUpdate(newEducation);
     }
 
+    if (data.isEditing[1] === 0) {
+        return (
+            <div className="Education-display">
+                <h2> Education </h2>
+                {data.education.map((edu, index) => (
+                    <div key={index}>
+                        <p> School: {edu.school} </p>
+                        <p> Degree: {edu.degree} </p>
+                        <p> Start Date: {edu.startDate} </p>
+                        <p> Graduation Date: {edu.graduationDate} </p>
+                    </div>
+                ))}
+                <button onClick={() => onEdit(1)}> Edit </button>
+            </div>
+        )
+    }
+
     return (
-        <div className="Education">
+        <div className="EducationForm">
             <h2> Education </h2>
             
             {education.map((edu, index) => (
-                <div key={index}>
+                <div key={index} className="EducationActualForm">
                     <label>
                         School:
                         <input type="text" name="school" value={edu.school} onChange={(e) => handleFieldChange(e, index)} required/>
