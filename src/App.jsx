@@ -5,7 +5,7 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import SubmitButton from './components/SubmitButton';
 import Resume from './components/Resume';  
-
+import './App.css';
 
 function App() {
   const [resumeData, setResumeData] = useState({
