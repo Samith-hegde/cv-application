@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import { useRef } from 'react';
+import { PDFDownloadLink, PDExport } from 'react-to-pdf';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
 import Experience from './components/Experience';
@@ -82,8 +84,9 @@ function App() {
         <SubmitButton onUpdate={handleSubmit} data={resumeData} onEdit={handleEdit}/>
       </div>    
 
-      <div className='Resume'>
+      <div className="Resume">
         <Resume data={submittedData}/>
+        
       </div>
 
     </div>
