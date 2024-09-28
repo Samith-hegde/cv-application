@@ -1,12 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { PDFDownloadLink, PDExport } from 'react-to-pdf';
+import { useState, useRef } from 'react';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
 import Experience from './components/Experience';
 import SubmitButton from './components/SubmitButton';
 import Resume from './components/Resume';  
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import './App.css';
 
 function App() {
@@ -23,6 +23,8 @@ function App() {
     education: [],
     experience: [],
   });
+
+  const resumeRef = useRef(null);
 
   const updateGeneralInfo = (data) => {
     setResumeData((prevData) => ({
@@ -75,6 +77,39 @@ function App() {
     }));
   }
 
+  const handlePDFDownload = async () => {
+    const canvas = await html2canvas(resumeRef.current)
+    const imgData = canvas.toDataURL('image/png')
+    
+    // Create PDF with A4 dimensions
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    })
+
+    // Calculate dimensions
+    const imgWidth = 210; // A4 width in mm
+    const pageHeight = 297; // A4 height in mm
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+    
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    // Add image to PDF, creating new pages if necessary
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save('resume.pdf')
+  }
+
   return (
     <div className="container">
       <div className='Form'>
@@ -85,8 +120,10 @@ function App() {
       </div>    
 
       <div className="Resume">
-        <Resume data={submittedData}/>
-        
+        <div ref={resumeRef}>
+          <Resume data={submittedData} id="pdf"/>
+        </div>
+        <button onClick={handlePDFDownload}>Download Resume as PDF</button>
       </div>
 
     </div>

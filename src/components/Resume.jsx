@@ -1,9 +1,10 @@
 import React from 'react';
+import DownloadButton from './DownloadButton';
 
 function Resume({ data }) {
 
   return (
-    <>
+    <div className="insideResume">
       <h2>{data.generalInfo.name}</h2>
 
       <div className="contact-info">
@@ -29,7 +30,7 @@ function Resume({ data }) {
               <p>{exp.startDate} - {exp.endDate}</p>
             </div>
         ))}
-    </>
+    </div>
   )
 };
 
